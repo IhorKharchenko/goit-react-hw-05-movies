@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.js": "/goit-react-hw-05-movies/static/js/main.3d5dcdf8.js",
+    "static/js/743.937ad9ef.chunk.js": "/goit-react-hw-05-movies/static/js/743.937ad9ef.chunk.js",
+    "static/js/7.1382071a.chunk.js": "/goit-react-hw-05-movies/static/js/7.1382071a.chunk.js",
+    "index.html": "/goit-react-hw-05-movies/index.html",
+    "main.3d5dcdf8.js.map": "/goit-react-hw-05-movies/static/js/main.3d5dcdf8.js.map",
+    "743.937ad9ef.chunk.js.map": "/goit-react-hw-05-movies/static/js/743.937ad9ef.chunk.js.map",
+    "7.1382071a.chunk.js.map": "/goit-react-hw-05-movies/static/js/7.1382071a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.3d5dcdf8.js"
+  ]
+}
