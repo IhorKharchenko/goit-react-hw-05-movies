@@ -1,15 +1,16 @@
-import { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { AppBar } from './AppBar';
 import { Box } from './Box';
-
-export const Layout = () => {
+import { Loader } from './Loader/Loader';
+const AppBar = lazy(() => import('./AppBar'));
+const Layout = () => {
   return (
-    <Box display="grid" gridTemplateColumns="200px 1fr">
+    <Box>
       <AppBar />
-      <Suspense fallback={null}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </Box>
   );
 };
+export default Layout;

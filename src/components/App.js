@@ -1,38 +1,53 @@
-import { lazy } from 'react';
-import CustomerDetails from 'pages/CustomerDetails';
-// import { Customers } from 'pages/Customers';
-// import { Sales } from 'pages/Sales';
+import { Global, css } from '@emotion/react';
+import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Box } from './Box';
-import { InvoiceDetails } from './InvoiceDetails';
-import { Invoices } from './invoices';
-import { Layout } from './Layout';
-// import { ToastContainer } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
-const Sales = lazy(() => import('../pages/Sales'));
-const Customers = lazy(() => import('../pages/Customers'));
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Loader } from './Loader/Loader';
+const Casts = lazy(() => import('./Casts'));
+const Reviews = lazy(() => import('./Reviews'));
+const Layout = lazy(() => import('./Layout'));
+const Home = lazy(() => import('pages/Home'));
+const MovieDetails = lazy(() => import('../pages/MoiveDetails'));
+const Movies = lazy(() => import('../pages/Movies'));
 
+const GlobalStyles = css`
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+`;
 export const App = () => {
   return (
     <Box as="main" p="3">
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Navigate to="dashboard" />} />
-          <Route path="dashboard" element={<div>Dashboard</div>} />
-          <Route path="sales" element={<Sales />}>
-            <Route path="analytics" element={<div>Analytics</div>} />
-            <Route path="invoices" element={<Invoices />}>
-              <Route path=":invoiceId" element={<InvoiceDetails />} />
+      <Global styles={GlobalStyles} />
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Navigate to="/home" />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="movies" element={<Movies />} />
+            <Route
+              path="/movies/get-movie-details/:id"
+              element={<MovieDetails />}
+            >
+              <Route path="cast" element={<Casts />} />
+              <Route path="reviews" element={<Reviews />} />
             </Route>
-            <Route path="deposits" element={<div>Deposits</div>} />
+            <Route
+              path="*"
+              element={
+                <div>
+                  <h1>Page not found</h1>
+                </div>
+              }
+            />
           </Route>
-          <Route path="reports" element={<div>Reports</div>} />
-          <Route path="feedback" element={<div>Feedback</div>} />
-          <Route path="customers" element={<Customers />} />
-          <Route path="customers/:customerId" element={<CustomerDetails />} />
-        </Route>
-      </Routes>
-      {/* <ToastContainer autoClose={3000} /> */}
+        </Routes>
+      </Suspense>
+      <ToastContainer autoClose={3000} position="top-center" />
     </Box>
   );
 };

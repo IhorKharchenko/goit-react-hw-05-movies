@@ -1,20 +1,20 @@
 import {
   BsStack,
   BsWalletFill,
-  BsBriefcaseFill,
-  BsChatLeftTextFill,
-  BsPersonLinesFill,
+  // BsBriefcaseFill,
+  // BsChatLeftTextFill,
+  // BsPersonLinesFill,
 } from 'react-icons/bs';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { Box } from './Box';
 
 const navItems = [
-  { href: 'dashboard', text: 'Dashboard', icon: BsStack },
-  { href: 'sales', text: 'Sales', icon: BsWalletFill },
-  { href: 'reports', text: 'Reports', icon: BsBriefcaseFill },
-  { href: 'feedback', text: 'Feedback', icon: BsChatLeftTextFill },
-  { href: 'customers', text: 'Customers', icon: BsPersonLinesFill },
+  { href: '/home', text: 'Home', icon: BsStack },
+  { href: '/movies', text: 'Movies', icon: BsWalletFill },
+  // { href: 'reports', text: 'Reports', icon: BsBriefcaseFill },
+  // { href: 'feedback', text: 'Feedback', icon: BsChatLeftTextFill },
+  // { href: 'customers', text: 'Customers', icon: BsPersonLinesFill },
 ];
 const NavItem = styled(NavLink)`
   display: flex;
@@ -33,10 +33,10 @@ const NavItem = styled(NavLink)`
     color: ${p => p.theme.colors.primary};
   }
 `;
-export const AppBar = () => {
+const AppBar = () => {
   return (
-    <Box as="header" p={3} height="100vh" borderRight="1px solid black">
-      <Box as="nav" display="flex" flexDirection="column">
+    <Box as="header" p={3} width="100vw" borderBottom="1px solid black">
+      <Box as="nav" display="flex">
         {navItems.map(({ href, text, icon: Icon }) => (
           <NavItem to={href} key={href}>
             <Icon size="16px" />
@@ -47,3 +47,4 @@ export const AppBar = () => {
     </Box>
   );
 };
+export default AppBar;

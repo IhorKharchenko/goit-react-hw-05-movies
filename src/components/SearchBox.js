@@ -1,11 +1,24 @@
-export const SearchBox = ({ value, onChange }) => {
+import { toast } from 'react-toastify';
+
+export const SearchBox = ({ onChange, onSubmit }) => {
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    const search = evt.currentTarget.query.value;
+    if (search.trim() === '') {
+      toast.error('Please enter the query');
+      return;
+    }
+    onSubmit(search);
+    evt.currentTarget.reset();
+  };
   return (
-    <div>
+    <form onSubmit={e => handleSubmit(e)}>
       <input
         type="text"
-        value={value}
-        onChange={e => onChange(e.target.value)}
+        name="query"
+        onChange={e => onChange(e.currentTarget.value)}
       />
-    </div>
+      <button type="submit">Search</button>
+    </form>
   );
 };
