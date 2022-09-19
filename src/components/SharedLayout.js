@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { Box } from './Box';
 import { Loader } from './Loader/Loader';
 const AppBar = lazy(() => import('./AppBar'));
-const Layout = () => {
+const SharedLayout = () => {
   return (
     <Box>
       <AppBar />
@@ -13,4 +13,4 @@ const Layout = () => {
     </Box>
   );
 };
-export default Layout;
+export default SharedLayout;

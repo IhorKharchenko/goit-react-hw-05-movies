@@ -1,6 +1,6 @@
 import { Box } from 'components/Box';
 import { Loader } from 'components/Loader/Loader';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useMemo, useState } from 'react';
 import {
   useParams,
   useLocation,
@@ -16,25 +16,28 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const location = useLocation();
   //   console.log(id);
+  const getMovieDetails = useMemo(
+    () => async id => {
+      try {
+        const movie = await API.getMovieDetails(id);
+
+        if (!movie) {
+          return;
+        } else {
+          // console.log(movie);
+          setMovie(movie);
+        }
+      } catch (error) {
+        toast.error(error);
+      }
+    },
+    []
+  );
   useEffect(() => {
     // console.log('рендер');
     getMovieDetails(Number(id));
-  }, [id]);
+  }, [getMovieDetails, id]);
   //   console.log(movie);
-  const getMovieDetails = async id => {
-    try {
-      const movie = await API.getMovieDetails(id);
-
-      if (!movie) {
-        return;
-      } else {
-        // console.log(movie);
-        setMovie(movie);
-      }
-    } catch (error) {
-      toast.error(error);
-    }
-  };
 
   if (!movie) return;
   //   console.log(movie);

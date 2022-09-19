@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Loader } from './Loader/Loader';
 const Casts = lazy(() => import('./Casts'));
 const Reviews = lazy(() => import('./Reviews'));
-const Layout = lazy(() => import('./Layout'));
+const SharedLayout = lazy(() => import('./SharedLayout'));
 const Home = lazy(() => import('pages/Home'));
 const MovieDetails = lazy(() => import('../pages/MoiveDetails'));
 const Movies = lazy(() => import('../pages/Movies'));
@@ -25,7 +25,7 @@ export const App = () => {
       <Global styles={GlobalStyles} />
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="/" element={<SharedLayout />}>
             <Route index element={<Navigate to="/home" />} />
             <Route path="/home" element={<Home />} />
             <Route path="movies" element={<Movies />} />
