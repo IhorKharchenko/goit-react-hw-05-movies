@@ -35,13 +35,3 @@ export const getMoviesByQuery = async query => {
   // console.log(response.data.results);
   return response.data.results;
 };
-
-export const deleteMaterial = async id => {
-  const response = await axios.delete(`/materials/${id}`);
-  return response.data;
-};
-
-export const updateMaterial = async fields => {
-  const response = await axios.put(`/materials/${fields.id}`, fields);
-  return response.data;
-};

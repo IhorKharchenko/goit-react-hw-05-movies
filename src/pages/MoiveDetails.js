@@ -15,7 +15,7 @@ const MovieDetails = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const location = useLocation();
-  //   console.log(id);
+  // console.log(location.state);
   const getMovieDetails = useMemo(
     () => async id => {
       try {
@@ -51,7 +51,8 @@ const MovieDetails = () => {
         />
         <Box p={4}>
           <h2>{movie.title}</h2>
-          <h3>({movie.tagline})</h3>
+          {movie.tagline && <h3>({movie.tagline})</h3>}
+
           <p>User score: {Math.round(movie.vote_average * 100) / 10}%</p>
           <b>Overview</b>
           <p>{movie.overview}</p>
@@ -64,10 +65,10 @@ const MovieDetails = () => {
         </Box>
       </Box>
       <Box p={4} display="flex" flexDirection="column">
-        <NavLink to={'cast'} state={{ from: location.state.from }}>
+        <NavLink to={'cast'} state={{ from: location.state?.from }}>
           Cast
         </NavLink>
-        <NavLink to={'reviews'} state={{ from: location.state.from }}>
+        <NavLink to={'reviews'} state={{ from: location.state?.from }}>
           Reviews
         </NavLink>
       </Box>

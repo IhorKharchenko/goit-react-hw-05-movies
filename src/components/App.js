@@ -26,25 +26,25 @@ export const App = () => {
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path="/" element={<SharedLayout />}>
-            <Route index element={<Navigate to="/home" />} />
-            <Route path="/home" element={<Home />} />
+            <Route index element={<Navigate to="home" />} />
+            <Route path="home" element={<Home />} />
             <Route path="movies" element={<Movies />} />
             <Route
-              path="/movies/get-movie-details/:id"
+              path="movies/get-movie-details/:id"
               element={<MovieDetails />}
             >
               <Route path="cast" element={<Casts />} />
               <Route path="reviews" element={<Reviews />} />
             </Route>
-            <Route
-              path="*"
-              element={
-                <div>
-                  <h1>Page not found</h1>
-                </div>
-              }
-            />
           </Route>
+          <Route
+            path="*"
+            element={
+              <div>
+                <h1>Page not found</h1>
+              </div>
+            }
+          />
         </Routes>
       </Suspense>
       <ToastContainer autoClose={3000} position="top-center" />

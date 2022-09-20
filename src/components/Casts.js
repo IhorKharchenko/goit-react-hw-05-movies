@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as API from '../services/api';
@@ -7,25 +7,29 @@ import { Box } from './Box';
 const Casts = () => {
   const { id } = useParams();
   const [casts, setCasts] = useState(null);
+  const getMovieCasts = useMemo(
+    () => async id => {
+      try {
+        const casts = await API.getMovieCasts(id);
+
+        if (!casts) {
+          return;
+        } else {
+          // console.log(casts.cast);
+          setCasts(casts.cast);
+        }
+      } catch (error) {
+        toast.error(error);
+      }
+    },
+    []
+  );
   useEffect(() => {
     // console.log(id);
     getMovieCasts(Number(id));
-  }, [id]);
+  }, [getMovieCasts, id]);
   //   console.log(movie);
-  const getMovieCasts = async id => {
-    try {
-      const casts = await API.getMovieCasts(id);
 
-      if (!casts) {
-        return;
-      } else {
-        // console.log(casts.cast);
-        setCasts(casts.cast);
-      }
-    } catch (error) {
-      toast.error(error);
-    }
-  };
   //   console.log(casts);
   if (!casts || casts.length === 0) return <p>No information about casts</p>;
   return (
