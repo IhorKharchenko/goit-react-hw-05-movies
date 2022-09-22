@@ -5,6 +5,7 @@ export const TrendingMoviesList = ({ movies }) => {
   const location = useLocation();
   return (
     <Box>
+      <h1>Now trending</h1>
       <ul>
         {movies.map(movie => (
           <li key={movie.id}>

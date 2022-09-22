@@ -1,8 +1,15 @@
+import ErrorPage from 'components/ErrorPage/ErrorPage';
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import * as API from '../services/api';
-import { Box } from './Box';
+import * as API from '../../services/api';
+import { Box } from '../Box';
+import {
+  StyledCastName,
+  StyledImg,
+  StyledList,
+  StyledListItem,
+} from './Casts.styled';
 
 const Casts = () => {
   const { id } = useParams();
@@ -15,7 +22,6 @@ const Casts = () => {
         if (!casts) {
           return;
         } else {
-          // console.log(casts.cast);
           setCasts(casts.cast);
         }
       } catch (error) {
@@ -25,29 +31,29 @@ const Casts = () => {
     []
   );
   useEffect(() => {
-    // console.log(id);
     getMovieCasts(Number(id));
+    return;
   }, [getMovieCasts, id]);
-  //   console.log(movie);
 
-  //   console.log(casts);
-  if (!casts || casts.length === 0) return <p>No information about casts</p>;
+  if (!casts || casts.length === 0) return <ErrorPage rtnBtn={false} />;
+
   return (
     <Box p={4} borderTop="1px solid black">
-      <ul>
+      <StyledList>
         {casts.map(cast => (
-          <li key={cast.id}>
-            <p>{cast.name}</p>
-            {cast.profile_path && (
-              <img
+          <StyledListItem key={cast.id}>
+            <StyledCastName>{cast.name}</StyledCastName>
+            {cast.profile_path ? (
+              <StyledImg
                 src={`https://image.tmdb.org/t/p/original${cast.profile_path}`}
-                alt=""
-                width="75px"
+                alt={`Here should be the ${cast.name}'s photo`}
               />
+            ) : (
+              <p>Here should be the {cast.name}'s photo</p>
             )}
-          </li>
+          </StyledListItem>
         ))}
-      </ul>
+      </StyledList>
     </Box>
   );
 };
